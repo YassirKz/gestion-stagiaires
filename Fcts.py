@@ -24,7 +24,9 @@ def menu():
     print("Press 1 to add a trainee")
     print("Press 2 to display the list of trainees")
     print("Press 3 to search for a trainee")
-    print("Press 4 to exit")
+    print("Press 4 to delete a trainee")
+    print("Press 5 to modify a trainee")
+    print("Press 6 to exit")
     print("----------------------------------------------")
 
 def lire_note(libelle):
@@ -52,6 +54,16 @@ def rechercher(nom):
     Lève KeyError si le nom n'existe pas.
     """
     return stagiaires[nom]
+
+def supprimer(nom):
+    """Supprime un stagiaire et retourne ses données."""
+    return stagiaires.pop(nom)
+
+def modifier(nom, prenom, notes):
+    """Modifie le prénom et les notes d'un stagiaire existant."""
+    if nom not in stagiaires:
+        raise KeyError(nom)
+    stagiaires[nom] = {'prenom': prenom, 'notes': notes}
 
 def moyenne(notes):
     """Calcule la moyenne d'une liste de notes (strings ou nombres)."""

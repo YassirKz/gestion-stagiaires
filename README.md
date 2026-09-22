@@ -8,6 +8,8 @@ Application Python de gestion de stagiaires avec authentification.
 - ➕ Ajouter un stagiaire
 - 📋 Afficher la liste des stagiaires
 - 🔍 Rechercher un stagiaire + calcul de moyenne
+- 🗑️ Supprimer un stagiaire
+- ✏️ Modifier un stagiaire
 - 💾 Sauvegarde automatique dans `data.json`
 
 ## 📂 Structure

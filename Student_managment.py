@@ -1,13 +1,13 @@
-from Fcts import lire_note, lire_texte, moyenne, rechercher, sauvegarde, stagiaires, menu
+from Fcts import lire_note, lire_texte, moyenne, modifier, rechercher, sauvegarde, supprimer, stagiaires, menu
 
 def main():
     choix = 1
-    while choix != 4:
+    while choix != 6:
         menu()
         try:
             choix = int(input("Donner votre choix : "))
         except ValueError:
-            print("Veuillez choisir une option entre 1 et 4.")
+            print("Veuillez choisir une option entre 1 et 6.")
             continue
 
         if choix == 1:
@@ -41,8 +41,30 @@ def main():
             print("Prénom:", stagiaire["prenom"])
             print("Moyenne:", moyenne(stagiaire["notes"]))
             print("---------------------------------------------------------")
-        elif choix != 4:
-            print("Veuillez choisir une option entre 1 et 4.")
+        elif choix == 4:
+            nom = lire_texte("Nom du stagiaire à supprimer :")
+            try:
+                supprimer(nom)
+            except KeyError:
+                print("Stagiaire non trouvé")
+            else:
+                print("Le stagiaire a été supprimé.")
+        elif choix == 5:
+            nom = lire_texte("Nom du stagiaire à modifier :")
+            if nom not in stagiaires:
+                print("Stagiaire non trouvé")
+                continue
+            prenom = lire_texte("Nouveau prénom :")
+            notes = [
+                lire_note("Nouvelle note 1ère année :"),
+                lire_note("Nouvelle note communication :"),
+                lire_note("Nouvelle note théorique :"),
+                lire_note("Nouvelle note pratique :"),
+            ]
+            modifier(nom, prenom, notes)
+            print("Le stagiaire a été modifié.")
+        elif choix != 6:
+            print("Veuillez choisir une option entre 1 et 6.")
 
     sauvegarde()
 
