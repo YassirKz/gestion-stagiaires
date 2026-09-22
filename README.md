@@ -44,6 +44,8 @@ python Student_managment.py
 ```
 
 > ⚠️ `comptes.pas` n'est pas versionné (sécurité).
+>
+> Le fichier `comptes.pas.example` contient uniquement des valeurs de démonstration.
 
 ## 🛠️ Technologies
 

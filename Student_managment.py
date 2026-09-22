@@ -1,36 +1,50 @@
-choix=1
+from Fcts import lire_note, lire_texte, moyenne, rechercher, sauvegarde, stagiaires, menu
 
-from Fcts import *
-
-while choix !=4 :
-    menu()
-    choix=int(input("Donner votre choix : "))
-    if choix==1 :
-        nom=input("Nom :")
-        prenom = input("Prénom :")
-        note1 = input("Note 1ére année :")
-        note2 = input("Note communication :")
-        note3 = input("Note Théorique :")
-        note4 = input("Note Pratique :")
-        stagiaires[nom]={'prenom':prenom,'notes':[note1,note2,note3,note4]}
-        print("Le stagiare est bien enregistré")
-    if choix==2 :
-        print("-------------------- Liste des stagiaires ---------------")
-        for st in stagiaires.items() :
-            print("Nom:",st[0]," | Prénom:",stagiaires[st[0]]["prenom"],"| Note1éreAnnée:",stagiaires[st[0]]["notes"][0],"| NoteCommunication:",stagiaires[st[0]]["notes"][1],"| NoteTH:",stagiaires[st[0]]["notes"][2],"| NotePR:",stagiaires[st[0]]["notes"][3])
-        print("---------------------------------------------------------")
-    if choix==3 :
+def main():
+    choix = 1
+    while choix != 4:
+        menu()
         try:
-            nom=input("donner le nom recherché:")
-            st=rechercher(nom)
-            print("----------------- Informations du stagiaire",nom,"----------------")
-            print("Nom:",nom)
-            print("Prénom:",st["prenom"])
-            T_notes=st["notes"]
-            print("Moyenne:",moyenne(T_notes) )
-            print("---------------------------------------------------------")
-        except:
-            print("Stagiaire non trouvé")
+            choix = int(input("Donner votre choix : "))
+        except ValueError:
+            print("Veuillez choisir une option entre 1 et 4.")
+            continue
 
-else:
+        if choix == 1:
+            nom = lire_texte("Nom :")
+            if nom in stagiaires:
+                print("Un stagiaire avec ce nom existe déjà.")
+                continue
+            prenom = lire_texte("Prénom :")
+            notes = [
+                lire_note("Note 1ère année :"),
+                lire_note("Note communication :"),
+                lire_note("Note théorique :"),
+                lire_note("Note pratique :"),
+            ]
+            stagiaires[nom] = {'prenom': prenom, 'notes': notes}
+            print("Le stagiaire est bien enregistré")
+        elif choix == 2:
+            print("-------------------- Liste des stagiaires ---------------")
+            for nom, stagiaire in stagiaires.items():
+                print("Nom:", nom, " | Prénom:", stagiaire["prenom"], "| Notes:", ", ".join(map(str, stagiaire["notes"])))
+            print("---------------------------------------------------------")
+        elif choix == 3:
+            nom = lire_texte("Donner le nom recherché :")
+            try:
+                stagiaire = rechercher(nom)
+            except KeyError:
+                print("Stagiaire non trouvé")
+                continue
+            print("----------------- Informations du stagiaire", nom, "----------------")
+            print("Nom:", nom)
+            print("Prénom:", stagiaire["prenom"])
+            print("Moyenne:", moyenne(stagiaire["notes"]))
+            print("---------------------------------------------------------")
+        elif choix != 4:
+            print("Veuillez choisir une option entre 1 et 4.")
+
     sauvegarde()
+
+if __name__ == "__main__":
+    main()

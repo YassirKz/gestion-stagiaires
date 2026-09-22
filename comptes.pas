@@ -1,3 +1,0 @@
-c1;pas1;c
-c2;pas2;c
-c3;pas3;c

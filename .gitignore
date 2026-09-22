@@ -8,6 +8,9 @@ env/
 venv/
 .venv/
 
+# Données sensibles locales
+comptes.pas
+
 # IDE
 .vscode/
 .idea/
